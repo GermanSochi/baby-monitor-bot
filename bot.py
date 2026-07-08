@@ -155,6 +155,11 @@ def status():
         'chat_ids': list(chat_ids)
     })
 
+@app.route('/health', methods=['GET'])
+def health():
+    """Health check endpoint для keep-alive"""
+    return jsonify({'status': 'ok', 'timestamp': __import__('time').time()})
+
 @app.route('/', methods=['GET'])
 def index():
     """Корневой маршрут"""
@@ -164,7 +169,8 @@ def index():
         'endpoints': {
             '/webhook': 'POST - Telegram webhook',
             '/alert': 'POST - Receive alerts from Baby Monitor',
-            '/status': 'GET - Bot status'
+            '/status': 'GET - Bot status',
+            '/health': 'GET - Health check (keep-alive)'
         }
     })
 
