@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: baby-monitor-bot
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn bot:app --bind 0.0.0.0:$PORT
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: ALERT_TOKEN
+        value: baby-monitor-secret-2024
